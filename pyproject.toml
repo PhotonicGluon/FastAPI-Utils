@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "FastAPI-Utils"
-version = "0.1.0+2024.12.13.1430"
+version = "0.1.0.dev1"
 description = "FastAPI Utilities"
 authors = ["PhotonicGluon"]
 readme = "README.md"
