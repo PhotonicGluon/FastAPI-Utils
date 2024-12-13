@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "FastAPI-Utils"
+version = "0.1.0+2024.12.13.1400"
+description = "FastAPI Utilities"
+authors = ["PhotonicGluon"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.11"
+
+fastapi = "^0.115.6"
+pydantic = "^2.10.3"
