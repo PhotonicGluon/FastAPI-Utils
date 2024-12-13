@@ -9,7 +9,10 @@ class ErrorDetail(BaseModel):
     def from_exception(cls, exception: Exception) -> "ErrorDetail":
         return cls(type=type(exception).__name__, message=str(exception))
 
+    def throw(self):
+        raise eval(self.type)(self.message)
+    
     @classmethod
-    def throw(cls, serialized: dict):
+    def throw_from_serialized(cls, serialized: dict):
         detail = cls(**serialized)
-        raise eval(detail.type)(detail.message)
+        detail.throw()
