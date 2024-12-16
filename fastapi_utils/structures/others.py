@@ -10,7 +10,10 @@ class ErrorDetail(BaseModel):
         return cls(type=type(exception).__name__, message=str(exception))
 
     def throw(self):
-        raise eval(self.type)(self.message)
+        try:
+            raise eval(self.type)(self.message)
+        except NameError:
+            raise RuntimeError(f"{self.type}: {self.message}")
     
     @classmethod
     def throw_from_serialized(cls, serialized: dict):
