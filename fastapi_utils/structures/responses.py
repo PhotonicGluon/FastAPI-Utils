@@ -43,4 +43,4 @@ class MatrixResponse(DefaultResponse):
 
 
 class DictResponse(DefaultResponse):
-    detail: Optional[Dict[str, str]] = None
+    detail: Optional[Dict[str, Optional[str]]] = None
