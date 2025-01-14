@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Union
 
 from pydantic import BaseModel, computed_field
 
@@ -43,4 +43,4 @@ class MatrixResponse(DefaultResponse):
 
 
 class DictResponse(DefaultResponse):
-    detail: Optional[Dict[str, Optional[str]]] = None
+    detail: Optional[Dict[str, Optional[Union[str, Dict]]]] = None
