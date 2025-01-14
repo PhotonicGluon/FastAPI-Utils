@@ -14,12 +14,6 @@ class DefaultResponse(BaseResponse):
     success: bool
     error: Optional[ErrorDetail] = None
 
-    @model_validator(mode="after")
-    def no_success_should_have_error(self) -> Self:
-        if not self.success and self.error is None:
-            raise ValueError("An error should be provided if `success` is `False`")
-        return self
-
 
 class ListResponse(DefaultResponse):
     detail: Optional[List] = None
