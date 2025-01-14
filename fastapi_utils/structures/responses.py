@@ -13,7 +13,7 @@ class BaseResponse(BaseModel):
 class DefaultResponse(BaseResponse):
     success: bool
     error: Optional[ErrorDetail] = None
-    
+
     @model_validator(mode="after")
     def no_success_should_have_error(self) -> Self:
         if not self.success and self.error is None:
@@ -34,8 +34,11 @@ class StringListResponse(ListResponse):
     detail: Optional[List[str]] = None
 
 
-class VectorResponse(ListResponse):
+class FloatListResponse(ListResponse):
     detail: Optional[List[float]] = None
+
+
+VectorResponse = FloatListResponse
 
 
 class MatrixResponse(DefaultResponse):

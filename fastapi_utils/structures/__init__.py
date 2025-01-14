@@ -4,6 +4,7 @@ from .responses import (
     DefaultResponse,
     ListResponse,
     StringListResponse,
+    FloatListResponse,
     VectorResponse,
     MatrixResponse,
     DictResponse,
