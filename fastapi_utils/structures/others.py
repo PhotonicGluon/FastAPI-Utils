@@ -14,7 +14,7 @@ class ErrorDetail(BaseModel):
             raise eval(self.type)(self.message)
         except NameError:
             raise RuntimeError(f"{self.type}: {self.message}")
-    
+
     @classmethod
     def throw_from_serialized(cls, serialized: dict):
         detail = cls(**serialized)
