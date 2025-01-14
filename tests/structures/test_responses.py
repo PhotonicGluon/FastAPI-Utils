@@ -9,6 +9,7 @@ from fastapi_utils.structures import (
     MatrixResponse,
     StringListResponse,
     VectorResponse,
+    ErrorDetail
 )
 
 
@@ -30,14 +31,20 @@ def test_default_response():
     response = DefaultResponse(success=True, detail="Hello World!")
     assert response.success
     assert response.detail == "Hello World!"
-
-    response = DefaultResponse(success=False)
+    assert response.error is None
+    
+    error_detail = ErrorDetail.from_exception(ValueError("Some Exception"))
+    response = DefaultResponse(success=False, error=error_detail)
     assert not response.success
     assert response.detail is None
-
+    assert response.error == error_detail
+    
     # Irregular responses
     with pytest.raises(ValidationError):
         DefaultResponse(success=True, detail=1234)
 
     with pytest.raises(ValidationError):
         DefaultResponse(detail="No success!")
+        
+    with pytest.raises(ValidationError):
+        DefaultResponse(success=False, detail="Not enough")  # Missing error

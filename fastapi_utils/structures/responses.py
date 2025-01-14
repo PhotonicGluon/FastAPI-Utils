@@ -1,6 +1,7 @@
 from typing import Dict, List, Optional, Tuple, Union
 
-from pydantic import BaseModel, computed_field
+from pydantic import BaseModel, computed_field, model_validator
+from typing_extensions import Self
 
 from fastapi_utils.structures.others import ErrorDetail
 
@@ -12,6 +13,12 @@ class BaseResponse(BaseModel):
 class DefaultResponse(BaseResponse):
     success: bool
     error: Optional[ErrorDetail] = None
+    
+    @model_validator(mode="after")
+    def no_success_should_have_error(self) -> Self:
+        if not self.success and self.error is None:
+            raise ValueError("An error should be provided if `success` is `False`")
+        return self
 
 
 class ListResponse(DefaultResponse):
