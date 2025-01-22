@@ -5,12 +5,13 @@ from fastapi_utils.structures import (
     BaseResponse,
     DefaultResponse,
     DictResponse,
+    ErrorDetail,
+    FloatListResponse,
     ListResponse,
     MatrixResponse,
     StringListResponse,
-    FloatListResponse,
+    StringOptionalListResponse,
     VectorResponse,
-    ErrorDetail,
 )
 
 
@@ -115,6 +116,47 @@ def test_string_list_response():
 
     with pytest.raises(ValidationError):
         StringListResponse(success=True, detail=[1.23, 4.56, -7.89])
+
+
+def test_string_optional_list_response():
+    # Regular responses
+    response = StringOptionalListResponse(success=True, detail=["alfa", "bravo", "charlie", "delta"])
+    assert response.success
+    assert response.detail == ["alfa", "bravo", "charlie", "delta"]
+    assert response.length == 4
+
+    response = StringOptionalListResponse(success=True, detail=["alfa", "bravo", "charlie", None, "delta", None])
+    assert response.success
+    assert response.detail == ["alfa", "bravo", "charlie", None, "delta", None]
+    assert response.length == 6
+
+    response = StringOptionalListResponse(success=True, detail=[None, None])
+    assert response.success
+    assert response.detail == [None, None]
+    assert response.length == 2
+
+    response = StringOptionalListResponse(success=True, detail=[])
+    assert response.success
+    assert response.detail == []
+    assert response.length == 0
+
+    response = StringOptionalListResponse(success=True)
+    assert response.success
+    assert response.detail is None
+    assert response.length is None
+
+    # Irregular responses
+    with pytest.raises(ValidationError):
+        StringOptionalListResponse(success=True, detail=0)
+
+    with pytest.raises(ValidationError):
+        StringOptionalListResponse(success=True, detail="hrm")
+
+    with pytest.raises(ValidationError):
+        StringOptionalListResponse(success=True, detail=[1, 2, 3, 4, 5])
+
+    with pytest.raises(ValidationError):
+        StringOptionalListResponse(success=True, detail=[1.23, 4.56, -7.89])
 
 
 def test_float_list_response():

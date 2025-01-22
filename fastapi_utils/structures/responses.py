@@ -34,6 +34,10 @@ class StringListResponse(ListResponse):
     detail: Optional[List[str]] = None
 
 
+class StringOptionalListResponse(ListResponse):
+    detail: Optional[List[Optional[str]]] = None
+
+
 class FloatListResponse(ListResponse):
     detail: Optional[List[float]] = None
 

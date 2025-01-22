@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "FastAPI-Utils"
-version = "0.1.0.dev2"
+version = "0.1.0.dev3"
 description = "FastAPI Utilities"
 authors = ["PhotonicGluon"]
 readme = "README.md"
@@ -15,9 +15,7 @@ pydantic = "^2.10.3"
 pytest = "^8.3.4"
 
 [tool.pytest.ini_options]
-addopts = [
-    "--import-mode=importlib",
-]
+addopts = ["--import-mode=importlib"]
 
 [build-system]
 requires = ["poetry-core"]

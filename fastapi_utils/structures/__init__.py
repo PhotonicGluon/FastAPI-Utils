@@ -7,5 +7,19 @@ from .responses import (
     ListResponse,
     MatrixResponse,
     StringListResponse,
+    StringOptionalListResponse,
     VectorResponse,
 )
+
+__all__ = [
+    "ErrorDetail",
+    "BaseResponse",
+    "DefaultResponse",
+    "DictResponse",
+    "FloatListResponse",
+    "ListResponse",
+    "MatrixResponse",
+    "StringListResponse",
+    "StringOptionalListResponse",
+    "VectorResponse",
+]
