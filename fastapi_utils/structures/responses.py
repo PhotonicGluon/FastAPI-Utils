@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple
 
 from pydantic import BaseModel, computed_field, model_validator
 from typing_extensions import Self
@@ -110,5 +110,5 @@ class DictResponse(DefaultResponse):
     A response that includes a dictionary.
     """
 
-    detail: Optional[Dict[str, Optional[Union[str, Dict]]]] = None
+    detail: Optional[Dict[str, Any]] = None
     "Optional dictionary included in the response"
